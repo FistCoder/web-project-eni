@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="reset.min.css">
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+            integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+    </head>
+    <body>
+        <main class="main">
+            <h1 class="title">Générateur des Codes QR</h1>
+            <div class="grid">
+
+                <section class="left">
+                    <input type="text" class="input-text" name="input-text" placeholder="     Ecrivez votre texte ici" id="input-text">
+                    <div>
+                        <h2>Paramètres QRcode</h2>
+                        <form id="qr-options" class="qr-options">
+                            <label for="color-pr">Selectionnez la couleur de l'accent:</label>
+                            <input type="color" value="#FFB5A7" name="color-pr" id="color-pr">
+                            <label for="color-bg">Selectionnez la couleur de l'arrière-plan:</label>
+                            <input type="color" value="#F8EDEB" name="color-bg" id="color-bg">
+                            <select name="corection" id="corection" >
+                                <option value="">--Please choose an option--</option>
+                                <option value="L"></option>
+                                <option value="M"></option>
+                                <option value="Q"></option>
+                                <option value="H"></option>
+                            </select>
+                        </form>
+                    </div>
+                </section>
+                <section class="right">
+                    <span>Ici votre QRcode </span>
+                    <span id="qrcode"></span>
+                </section>
+            </div>
+        </main>
+        <p class="copyright">
+            Copyright of Me, Myself and I
+        </p>
+        <img src="dog.jpg" style="display: none;" id="dog" alt="">
+    </body>
+</html>
+<script src="app.js" type="module"></script>
+
+<form action id="form"></form>
