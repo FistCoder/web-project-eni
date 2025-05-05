@@ -1,13 +1,13 @@
 # QR Code Generator Web App
 
-Une application web permettant de générer des QR codes à partir d'une URL, d'un texte ou d'un fichier image (JPEG, PNG, WEBP).
+Une application web permettant de générer des QR codes à partir d'une URL, d'un texte ou d'un fichier image (JPEG, SVG).
 
 ## Fonctionnalités
 
 - Génération de QR codes personnalisables (format : SVG, PNG ou TXT, couleur d'arrière-plan, etc.)
 - Téléchargement ou affichage immédiat du QR code généré
 - Génération d'un PDF contenant plusieurs QR codes pour impression, avec options de taille
-- Historique local des contenus déjà utilisés, stocké via `localStorage`
+- Historique local des contenus déjà utilisés par utilisateur, stocké via `localStorage`
 
 ## Technologies utilisées
 
