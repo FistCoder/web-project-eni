@@ -1,55 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="reset.min.css">
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Codes QR</title>
 
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
-            integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
-    </head>
-    <body>
-        <main class="main">
-            <h1 class="title">Générateur des Codes QR</h1>
-            <div class="grid">
+    <!-- External Scripts -->
+    <link rel="stylesheet" href="style.css">
+    <link rel='stylesheet' href='reset.min.css'>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <main class="main">
+      <h1 class="title">Générateur de Codes QR</h1>
 
-                <section class="left">
-                    <input type="text" class="input-text" name="input-text" placeholder="     Ecrivez votre texte ici" id="input-text">
-                    <div>
-                        <h2>Paramètres QRcode</h2>
-                        <form id="qr-options" class="qr-options">
-                            <label for="color-pr">Selectionnez la couleur de l'accent:</label>
-                            <input type="color" value="#FFB5A7" name="color-pr" id="color-pr">
-                            <label for="color-bg">Selectionnez la couleur de l'arrière-plan:</label>
-                            <input type="color" value="#F8EDEB" name="color-bg" id="color-bg">
-                            <select name="corection" id="corection" >
-                                <option value="">--Please choose an option--</option>
-                                <option value="L"></option>
-                                <option value="M"></option>
-                                <option value="Q"></option>
-                                <option value="H"></option>
-                            </select>
-                        </form>
-                    </div>
-                </section>
-                <section class="right">
-                    <span>Ici votre QRcode </span>
-                    <span id="qrcode"></span>
-                </section>
+      <div class="grid">
+        <!-- Left Side: QR Options Form -->
+        <section class="card">
+          <h2 class="section-title">Paramètres</h2>
+          <form id="qr-options" class="qr-options">
+            <div class="input-group">
+              <label for="input-text">Texte ou URL à encoder</label>
+              <input
+                type="text"
+                class="input-text"
+                name="input-text"
+                placeholder="Écrivez votre texte ici"
+                id="input-text"
+                required
+                list="history" />
+              <datalist id="history">
+              </datalist>
             </div>
-        </main>
-        <p class="copyright">
-            Copyright of Me, Myself and I
-        </p>
-        <img src="dog.jpg" style="display: none;" id="dog" alt="">
-    </body>
-</html>
-<script src="app.js" type="module"></script>
 
-<form action id="form"></form>
+            <div class="input-group">
+              <h3>Personnalisation</h3>
+              <div class="input-row">
+                <div>
+                  <label for="color-pr">Couleur de l'accent</label>
+                  <input type="color" value="#000000" name="color-pr"
+                    id="color-pr" />
+                </div>
+
+                <div>
+                  <label for="color-bg">Couleur de l'arrière-plan</label>
+                  <input type="color" value="#FFFFFF" name="color-bg"
+                    id="color-bg" />
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <h3>Dimensions</h3>
+              <div class="input-row">
+                <div>
+                  <label for="size">Taille pour impression (en mm)</label>
+                  <input min="20" max="200" value="25" class="input-number"
+                    type="number" name="size" id="size">
+                </div>
+
+                <div>
+                  <label for="margin">Bordure</label>
+                  <input class="input-number" min="0" value="1" max="5"
+                    type="number" name="margin" id="margin">
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="correction">Niveau de correction d'erreur</label>
+              <select name="correction" id="correction">
+                <option value="L">Faible</option>
+                <option value="M" selected>Moyen</option>
+                <option value="Q">Qualité</option>
+                <option value="H">Élevé</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn" id="submit">Générer le QR
+              Code</button>
+          </form>
+        </section>
+
+        <!-- Right Side: QR Code Display -->
+        <section class="card qr-display">
+          <h2 class="section-title">Votre QR Code</h2>
+          <div class="qr-container">
+            <div id="qrcode"></div>
+            <div id="pdfButtonCont"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <p class="copyright">
+        &copy; 2025 Générateur de Codes QR | Me, Myself and I
+      </p>
+    </footer>
+
+    <!-- Your App Script -->
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
