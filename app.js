@@ -26,8 +26,7 @@ function constructQRCodeURL(data, margin, ecc, colorPr, colorBg) {
     margin: margin,
   });
   // concat everything together
-  const qrCodeUrl = `${baseUrl}?${params.toString()}`;
-  return qrCodeUrl;
+  return `${baseUrl}?${params.toString()}`;
 }
 
 /**
@@ -41,12 +40,12 @@ function createQRCodePDF(image, size) {
   const doc = new jsPDF();
 
   // set repetitions per row and column and the step
-  const repetitionsX = 205 - size;
-  const repetitionsY = 292 - size;
+  const maxX = 205 - size;
+  const maxY = 292 - size;
   const step = size + 10;
   // loop and populate QR codes at designated points
-  for (let i = 5; i <= repetitionsY; i += step) {
-    for (let l = 5; l <= repetitionsX; l += step) {
+  for (let i = 5; i <= maxX; i += step) {
+    for (let l = 5; l <= maxY; l += step) {
       doc.addImage(image, "PNG", l, i, size, size);
     }
   }
@@ -91,6 +90,11 @@ function saveInputToLS(inputString) {
   return "saved";
 }
 
+/**
+ * Adds input from input-text to ls
+ * and as a option to the datalist
+ *
+ */
 function populateDatalist() {
   dataListElem.innerHTML = "";
   const historyArray = JSON.parse(localStorage.getItem("history"));
@@ -134,19 +138,23 @@ formElem.addEventListener("submit", (event) => {
   const img = document.createElement("img");
   img.src = qrCodeURL;
   img.alt = "QR Code for: " + formData.get("input-text");
-  img.style.maxWidth = "100%";
 
   // Wait for image to load before creating PDF
   img.onload = () => {
     // Remove loading indicator
     qrContainer.innerHTML = "";
+
     qrContainer.appendChild(img);
+    
     const size = parseInt(formData.get("size"));
     const doc = createQRCodePDF(img, size);
     createPDFButton(doc);
   };
 });
 
+// if user is first time on the page, 
+// create an empty array and 
+// save it to ls under history key
 if (!localStorage.getItem('history')) {
   const historyArray = [];
   localStorage.setItem("history", JSON.stringify(historyArray));
