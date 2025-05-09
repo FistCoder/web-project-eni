@@ -146,7 +146,8 @@ formElem.addEventListener("submit", (event) => {
     createPDFButton(doc);
   };
 });
-if (!localStorage.key(0)) {
+
+if (!localStorage.getItem('history')) {
   const historyArray = [];
   localStorage.setItem("history", JSON.stringify(historyArray));
 }
